@@ -28,12 +28,13 @@ interface Config {
 
 const getConfig = (): Config => {
   // Validate required env vars
-  const requiredVars = ['ANTHROPIC_API_KEY'];
-  const missing = requiredVars.filter((key) => !process.env[key]);
-  
-  if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
-  }
+  // No required API keys - using free Hugging Face!
+const requiredVars: string[] = [];
+const missing = requiredVars.filter((key) => !process.env[key]);
+
+if (missing.length > 0) {
+  throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+}
 
   return {
     port: parseInt(process.env.PORT || '3001', 10),
