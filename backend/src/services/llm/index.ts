@@ -163,10 +163,11 @@ export class HuggingFaceLLMService implements LLMServiceInterface {
       const data = await response.json();
       
       let generatedText = '';
-      if (Array.isArray(data) && data[0]?.generated_text) {
-        generatedText = data[0].generated_text.trim();
-      } else if (data.generated_text) {
-        generatedText = data.generated_text.trim();
+      const responseData = data as any;
+      if (Array.isArray(responseData) && responseData[0]?.generated_text) {
+      generatedText = responseData[0].generated_text.trim();
+      } else if (responseData.generated_text) {
+      generatedText = responseData.generated_text.trim();
       }
 
       if (!generatedText || generatedText.length < 10) {
